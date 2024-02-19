@@ -1,0 +1,11 @@
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    {{ form.errors }}
+    <input type="submit" value="OK">
+
+    {% if image.image %}
+        <p>Додане фото:</p>
+        <img class="img-article-left" src="{{ image.image.url }}">
+    {% endif %}
+</form>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Усі Типи Автомобілів</title>
+</head>
+<body>
+    <h1>Усі Типи Автомобілів</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Назва авто</th>
+                <th>Марка авто</th>
+                <th>Ціна</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car_type in car_type %}
+                <tr>
+                    <td>{{ car_type.name }}</td>
+                    <td>{{ car_type.brand }}</td>
+                    <td>${{ car_type.price }}</td>
+                </tr>
+            {% empty %}
+
+                <tr>
+                    <td colspan="3">На даний момент немає доступних типів автомобілів.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

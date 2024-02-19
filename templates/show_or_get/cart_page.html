@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Сторінка корзини</title>
+</head>
+<body style="background-color: #508bfc; color: #1E1E1E">
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<h1>Ваша корзина</h1>
+<ul>
+    <h3>Додані авто:</h3>
+    {% for car in user_cars %}
+        <div>
+            <strong>{{ car.car_type.brand }} {{ car.car_type.name }}</strong><br>
+            <em>Рік випуску: {{ car.year }}</em><br>
+            <em>Ціна: ${{ car.car_type.price }}</em><br>
+            <em>Ділер: {{ car.car_type.dealerships.first.name }}</em>
+            <p></p>
+            {% empty %}
+        </div>
+        <hr>
+    {% endfor %}
+
+    {% if order %}
+        <div>
+            <h3>Загальна інформація:</h3>
+            <em>ID замовлення: {{ order.id }}</em><br>
+            <em>ID клієета: {{ order.client.id }}</em><br>
+            <em>ID продавця: {{ order.dealership.id }}</em><br>
+            <em>Ціна: {{ total_price }}</em><br>
+        </div>
+    {% endif %}
+
+</ul>
+
+{% if order.id %}
+    <form method="POST" action="{% url 'pay_order' order.id %}" target="_blank">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-success" name="redirect_on_store_page" value="Сплатити">
+    </form>
+    <p></p>
+    <form method="POST" action="{% url 'cancel_order' order.id %}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" name="redirect_on_store_page" value="Відмінити замовлення">
+    </form>
+    <p></p>
+{% endif %}
+
+<form method="GET" action="{% url 'view_cart' %}">
+    {% csrf_token %}
+    {% buttons %}
+        <input type="submit" class="btn btn-light" name="redirect_on_store_page" value="Назад">
+    {% endbuttons %}
+</form>
+</body>
+</html>
