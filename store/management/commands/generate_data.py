@@ -15,31 +15,31 @@ CAR_TYPES = [
         "price": "100000",
         "dealership": "BMW-Dealer",
         "color": "Black",
-        "image": "store/images/x5black.png",
+        "image": "store/images/bmwx5.png",
     },
     {
-        "name": "R8",
-        "brand": "AUDI",
+        "name": "M2",
+        "brand": "BMW",
         "price": "90000",
-        "dealership": "AUDI-Dealer",
+        "dealership": "BMW-Dealer",
         "color": "White",
-        "image": "store/images/r8white.png",
+        "image": "store/images/bmwm2.png",
     },
     {
-        "name": "Bentayga",
-        "brand": "Bentley",
+        "name": "M8",
+        "brand": "BMW",
         "price": "110000",
-        "dealership": "Bentley-Dealer",
-        "color": "Red",
-        "image": "store/images/bbred.png",
+        "dealership": "BMW-Dealer",
+        "color": "Grey",
+        "image": "store/images/bmwm8.png",
     },
     {
-        "name": "AMG",
-        "brand": "Mercedes",
+        "name": "M5",
+        "brand": "BMW",
         "price": "200000",
-        "dealership": "Mercedes-Dealer",
-        "color": "Green",
-        "image": "store/images/amggreen.png",
+        "dealership": "BMW-Dealer",
+        "color": "Grey",
+        "image": "store/images/mbwm5.png",
     },
 ]
 
@@ -79,12 +79,12 @@ class Command(BaseCommand):
                     car_image_field = File(car_image_file, car_image_name)
                     car_image_field.name = f"car_images/{car_image_name}"
 
-                    Car.objects.create(
-                        car_type=car_type,
-                        color=car_type_data["color"],
-                        year=random.randint(2000, 2024),
-                        image=car_image_field,
-                    )
+                Car.objects.create(
+                    car_type=car_type,
+                    color=car_type_data["color"],
+                    year=random.randint(2000, 2024),
+                    image=car_image_field,
+                )
 
             obj, created = Dealership.objects.get_or_create(
                 name=car_type_data["dealership"]
