@@ -337,4 +337,3 @@ def get_all_dealership(request):
             "search_query": search_query,
         },
     )
-    
