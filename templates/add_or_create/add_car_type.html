@@ -1,0 +1,6 @@
+<form action="" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    {{ car_type }}
+    {{ car_type.errors }}
+    <input type="submit" value="OK">
+</form>

@@ -1,0 +1,7 @@
+<p>Формат надання номеру: +xx (xxx) xxx-xxxx</p>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ client }}
+    {{ client.errors }}
+    <input type="submit" value="OK">
+</form>

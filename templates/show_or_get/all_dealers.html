@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Дилери та автомобілі</title>
+</head>
+<body>
+    <h1>Список Дилерів</h1>
+    <div class="search-form-container">
+        <form method="get" action="{% url 'get_all_dealership' %}" class="search-form">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="search" placeholder="По назві" value="{{ search_query }}">
+                <button class="btn btn-secondary" type="submit">Шукати</button>
+            </div>
+        </form>
+    </div>
+    <ul>
+        {% for dealer in dealer_list %}
+            <li>
+                <strong>{{ dealer.name }}</strong><br>
+                <em>Доступні Автомобілі:</em>
+                <ul>
+                    {% for car in dealer.available_car_types.all %}
+                        <li>
+                            {{ car.brand }} {{ car.name }}<br>
+                            <em>Ціна: ${{ car.price }}</em>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <p></p>
+        {% empty %}
+            <p>Наразі немає доступних дилерів.</p>
+        {% endfor %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if cars.has_previous %}
+                <a href="?page=1" class="btn btn-secondary">&laquo; Перша</a>
+                <a href="?page={{ cars.previous_page_number }}" class="btn btn-secondary">Попередня</a>
+            {% endif %}
+
+            <span class="current btn btn-light">
+                Page {{ cars.number }} of {{ cars.paginator.num_pages }}.
+            </span>
+
+            {% if cars.has_next %}
+                <a href="?page={{ dealers.next_page_number }}" class="btn btn-secondary">Наступна</a>
+                <a href="?page={{ dealers.paginator.num_pages }}" class="btn btn-secondary">Остання &raquo;</a>
+            {% endif %}
+            <p></p>
+        </span>
+        </div>
+    </ul>
+</body>
+</html>
